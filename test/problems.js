@@ -1,6 +1,5 @@
 var R = require('ramda');
 var bigInt = require('big-integer');
-var toString = R.invoke('toString', []);
 
 //https://blog.svpino.com/2015/05/07/five-programming-problems-every-software-engineer-should-be-able-to-solve-in-less-than-1-hour
 describe("compute the sum of a list", function() {
@@ -60,7 +59,7 @@ describe("fibonacci sequence", function() {
 
   it("compute first 100 numbers", function() {
     var result = R.map(
-      R.compose(toString, fib),
+      R.compose(R.toString, fib),
       R.range(0, 101).map((x) => bigInt(x))
     );
 
@@ -72,13 +71,13 @@ describe("given list of non negative integers", function() {
   var example = [50, 2, 1, 9];
 
   it("arranges them to form largest number possible", function() {
-    var sortByLexicalDesc = R.compose(R.reverse, R.sortBy(toString));
+    var sortByLexicalDesc = R.compose(R.reverse, R.sortBy(R.toString));
     var concat = (x, y) => x + y;
 
     var largestNumberPossible = R.compose(
       parseInt,
       R.reduce(concat, ""),
-      R.map(toString),
+      R.map(R.toString),
       sortByLexicalDesc
     );
 
